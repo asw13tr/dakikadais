@@ -1,0 +1,40 @@
+<div class="sidebox">
+    <div class="sidecontent">
+        <h6 class="pt-2">İş İsteklerinde Ara</h6>
+        <hr>
+        <form class="input-group mb-3" action="{% url 'istek_ara' %}" method="GET">
+          <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Ör: Muhasebeci"  aria-describedby="searchButton">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="searchButton">Ara</button>
+          </div>
+        </form>
+    </div>
+</div>
+
+{% if globalSehirListIstek %}
+<div class="sidebox">
+    <div class="sidetitle">Şehirler</div>
+    <div class="sidecontent">
+        <ul class="sidemenu col2">
+        {% for item in globalSehirListIstek %}
+        <li><a href="{{ item.get_istek_url }}" title="{{ item.isim }} iş ilanları"><span class="badge badge-secondary">{{ item.istek_sayisi }}</span> {{ item.isim }}</a></li>
+        {% endfor %}
+        </ul>
+        <span class="moresidemenu">Daha Fazla Göster +</span>
+    </div>
+</div>
+{% endif %}
+
+{% if globalMeslekListIstek %}
+<div class="sidebox">
+    <div class="sidetitle">Meslekler</div>
+    <div class="sidecontent">
+        <ul class="sidemenu">
+        {% for item in globalMeslekListIstek %}
+        <li><a href="{{ item.get_istek_url }}" title="{{ item.baslik }} iş ilanları"><span class="badge badge-secondary">{{ item.istek_sayisi }}</span> {{ item.baslik }}</a></li>
+        {% endfor %}
+        </ul>
+        <span class="moresidemenu">Daha Fazla Göster +</span>
+    </div>
+</div>
+{% endif %}

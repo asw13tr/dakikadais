@@ -1,0 +1,5 @@
+{% if request.user.is_authenticated and request.user.uye_tipi == "is_veren" %}
+    {% include './sidebar-isveren.html' %}
+{% else %}
+    {% include './sidebar-calisan.html' %}
+{% endif %}

@@ -1,0 +1,80 @@
+{% extends 'master.html' %}
+{% block content %}
+<article>
+
+<section class="ilan-kutusu single" style="border-left-color: red;">
+    <div class="alert alert-warning">
+        <h4>Bir iş ilanını siliyorsunuz</h4><hr>
+        <h6>Aşağıdaki ayrıntılara sahip iş ilanınızı silmek üzeresiniz.</h6>
+        <h6>Bu işlem bir daha geri alınamaz o yüzden silmek istediğinizden emin olduktan sonra silme işlemini gerçekleştirin.</h6>
+    </div>
+    <div class="text-right">
+        <form action="{{ request.get_full_path }}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="ilan_id" value="{{ item.id }}">
+            <button class="btn btn-danger" name="islem" value="sil">Eminim Bu İlanı Sil</button>
+            <a href="{% url 'ilanlarim' %}" class="btn btn-secondary">Silmekten Vazgeç</a>
+        </form>
+    </div>
+    <hr>
+	<div class="items">
+    <div class="row">
+		<div class="col-sm-12 col-md-4">Başlık</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.baslik }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Şehir</div>
+		<div class="col-sm-12 col-md-8"><span><a href="{{ item.sehir.get_absolute_url }}">{{ item.sehir }}</a></span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Meslek</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMeslekUrls|safe }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Kategori</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.firma.kategori|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Zaman</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getZamanStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Cinsiyet</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getCinsiyet|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yaş Aralığı</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.yas_min|default:"Belirtilmemiş" }} - {{ item.yas_max|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Maaş</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMaasStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Eğitim</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getEgitimStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Tecrübe</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getTecrube|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Askerlik</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getAskerlikStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Konuşma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getKonusulanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Yazma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getYazilanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	</div>
+
+	<h3 class="mt-2">Ayrıntılar</h3><hr>
+	{{ item.detay|safe }}
+</section>
+
+</article>
+{% endblock %}

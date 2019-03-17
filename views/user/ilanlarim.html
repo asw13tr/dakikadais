@@ -1,0 +1,16 @@
+{% extends 'master-full.html' %}
+{% block content %}
+<div class="bg-white p-4 minh">
+    <div><h4>İş İlanlarım</h4><hr/></div>
+<div class="row">
+<div class="col-md-9">
+{% if items %}
+{% for item in items %}
+    {% include "inc/item-box.html" with item=item %}
+{% endfor %}
+{% endif %}
+</div>
+{% include 'user/sidebar.html' %}
+</div>
+</div>
+{% endblock %}

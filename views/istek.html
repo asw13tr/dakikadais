@@ -1,0 +1,102 @@
+{% extends 'master.html' %}
+{% block content %}
+<article>
+
+<header class="ilanlar-bilgi">
+	<h1 class="ilan-baslik">{{ item.baslik }}</h1>
+	<h2 class="firma-baslik">{{ item.firma.adi }}</h2>
+	<hr>
+</header>
+
+<section class="ilan-kutusu single">
+	<h3 class="mt-2">Genel Bilgiler</h3><hr>
+	<div class="items">
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Şehir</div>
+		<div class="col-sm-12 col-md-8"><span><a href="{{ item.sehir.get_istek_url }}">{{ item.sehir }}</a></span></div>
+	</div>
+    {% if item.meslek %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Meslek</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMeslekUrls|safe }}</span></div>
+	</div>
+    {% endif %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Zaman</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getZamanStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% if item.uye.cinsiyet %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Cinsiyet</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getCinsiyet|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yaş</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.get_yas|default:"" }} ({{ item.uye.dogum_tarihi|default:"Doğum Tarihi Belirtilmemiş" }})</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Maaş</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMaasStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Eğitim</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.egitim|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Tecrübe</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getTecrube|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Askerlik</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.askerlik|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% if item.uye.dil_konusma %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Konuşma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getKonusulanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+    {% if item.uye.dil_yazma %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Yazma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getYazilanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+	</div>
+
+	<h3 class="mt-2">Ayrıntılar</h3><hr>
+	{{ item.detay|safe }}
+</section>
+
+<section class="ilan-kutusu single">
+	<h3 class="mt-2">Kullanıcı bilgileri</h3><hr>
+	{% if request.user.is_authenticated %}
+		<div class="items">
+			<div class="row">
+				<div class="col-sm-12 col-md-4">İş veren</div>
+				<div class="col-sm-12 col-md-8">{{ item.uye.full_name|default:item.uye.username }}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-4">Telefon</div>
+				<div class="col-sm-12 col-md-8">{{ item.uye.telefon|default:"" }}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-md-4">E-posta</div>
+				<div class="col-sm-12 col-md-8">{{ item.uye.email|default:"" }}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-md-4">Hakkında</div>
+				<div class="col-sm-12">{{ item.uye.hakkinda|default:""|safe }}</div>
+			</div>
+		</div>
+	{% else %}
+	<div class="alert alert-warning">Firma bilgilerini görebilmek için <a href="{% url 'kayit_ol' %}">üye ol</a>manız ve <a href="{% url 'giris_yap' %}">üye girişi</a> yapmanız gerekmektedir.</div>
+	{% endif %}
+</section>
+
+
+</article>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'master.html' %}
+{% block content %}
+
+{% include "inc/big-buttons.html" %}
+
+
+<div class="ilanlar-bilgi"><h1 title="{{ page_title|default:"İş ilanları" }}">{{ page_title|default:"İş ilanları" }}
+    {% if total %}<span class="badge badge-success">{{ total }}</span>{% endif %}
+</h1><hr></div>
+
+
+
+{% if items %}
+{% for item in items %}
+    {% include "inc/item-box.html" with item=item %}
+{% endfor %}
+{% endif %}
+
+
+{% endblock %}

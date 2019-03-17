@@ -1,0 +1,17 @@
+<div class="form-group">
+    {{ item.label_tag }}
+
+    {% if item.html_name == 'cover' and item.value  %}
+    {% load static %}
+    <img src="{% get_media_prefix %}{{ item.value }}" alt="" class="img-thumbnail img-fluid">
+    {% endif %}
+    {{ item }}
+    {% if item.help_text %}<small class="form-text text-muted">{{ item.help_text|safe }}</small>{% endif %}
+    {% if item.errors %}
+        <ol class="alert alert-danger">
+        {% for error in item.errors %}
+            <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</div>

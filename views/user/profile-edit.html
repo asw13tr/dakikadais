@@ -1,0 +1,103 @@
+{% extends 'master-full.html' %}
+{% block content %}
+{% if form %}
+<form action="{{ request.get_full_path }}" method="POST" enctype="multipart/form-data">
+<div class="row bg-white p-4">
+    <div class="clearfix col-12"><h4>Profil Bilgilerinizi Güncelleyin</h4><hr></div>
+    {% include 'inc/alert.html' %}
+    <div class="col-md-9">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.first_name %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.last_name %}</div>
+
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.tcno %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.telefon %}</div>
+
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.email %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.cinsiyet %}</div>
+
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.sehir %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.konum %}</div>
+
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.egitim %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.askerlik %}</div>
+
+                <div class="col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.dil_konusma %}</div>
+                <div class="col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.dil_yazma %}</div>
+
+                <div class="col-sm-6"><div class="input-group date">{% include 'finput-item.html' with item=form.dogum_tarihi %}</div></div>
+
+                <div class="col-12"><h5>Hakkında</h5><hr></div>
+                <div class="col-12">{% include 'finput-item.html' with item=form.hakkinda %}</div>
+
+                <div class="col-12"><h5>Sosyal Ağlar</h5><hr></div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.website %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.facebook %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.twitter %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.google_plus %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.youtube %}</div>
+                <div class="col-sm-6">{% include 'finput-item.html' with item=form.instagram %}</div>
+
+                <div class="col-12"><h5>Kullanıcı Fotoğrafı</h5><hr></div>
+                <div class="col-sm-4">{% include 'finput-item.html' with item=form.fotograf image=True %}</div>
+                <div class="col-12"><hr>
+                    <button class="btn btn-success font-weight-bold">Profil Bilgilerini Güncelle</button>
+                </div>
+
+            </div>
+    </div><!-- .col-md-9 -->
+
+    {% include 'user/sidebar.html' %}
+
+
+
+
+</div>
+</form>
+{% endif %}
+{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'datepicker/css/bootstrap-datepicker.min.css' %}">
+<style>
+    .form-group > label{ font-weight: 500; color: #000; display: block; }
+    .checkboxes .form-group ul{ margin: 0; padding: 0; list-style-type: none; display: block; overflow: hidden; max-height: 100px; overflow-y: auto;
+    border: 1px solid rgba(100, 100, 100, 0.18); min-height: 80px;}
+    .checkboxes .form-group ul li{ width: 50%; float: left; margin: 0; padding: 2px 5px; font-size: 14px;}
+    .checkboxes .form-group ul li label{ margin: 0; cursor: pointer; }
+
+    .checkboxes .form-group ul#id_meslek{ min-height: 450px; max-height: 450px; }
+    .checkboxes .form-group ul#id_meslek li{ width: 100%; float: none; }
+
+</style>
+{% endblock %}
+{% block footer %}
+<script src="{% static 'datepicker/js/bootstrap-datepicker.tr.min.js' %}"></script>
+<script src="{% static 'datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+
+<script type="text/javascript">
+    $('input').attr('autocomplete', 'off');
+    $('input[type=text],input[type=password],input[type=email],input[type=url],input[type=file],textarea, select').addClass('form-control');
+    $('select').addClass('custom-select');
+    $('.django-ckeditor-widget').attr('style', 'width:100%;');
+    $('.django-ckeditor-widget').parent().find('label').remove();
+    $('input[type=file]').on("change", function(e){
+        var url = window.URL.createObjectURL( e.target.files[0] )
+        if( url ){
+            $(this).parent('.form-group').find('img').remove();
+            $(this).before('<img src="'+url+'" class="img-fluid" />');
+        }
+    });
+
+
+    $('#id_dogum_tarihi').datepicker({
+        format: "dd/mm/yyyy",
+        language: "tr",
+        clearBtn: true,
+        endDate: "-15y"
+    });
+
+</script>
+{{ form.media }}
+{% endblock %}

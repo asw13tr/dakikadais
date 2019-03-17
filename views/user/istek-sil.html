@@ -1,0 +1,85 @@
+{% extends 'master.html' %}
+{% block content %}
+<article>
+
+
+
+<section class="ilan-kutusu single" style="border-left-color: red;">
+    <div class="alert alert-warning">
+        <h4>Bir iş isteğini siliyorsunuz</h4><hr>
+        <h6>Aşağıdaki ayrıntılara sahip iş isteğinizi silmek üzeresiniz.</h6>
+        <h6>Bu işlem bir daha geri alınamaz o yüzden silmek istediğinizden emin olduktan sonra silme işlemini gerçekleştirin.</h6>
+    </div>
+    <div class="text-right">
+        <form action="{{ request.get_full_path }}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="istek_id" value="{{ item.id }}">
+            <button class="btn btn-danger" name="islem" value="sil">Eminim Bu İsteği Sil</button>
+            <a href="{% url 'isteklerim' %}" class="btn btn-secondary">Silmekten Vazgeç</a>
+        </form>
+    </div>
+    <hr>
+	<div class="items">
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Başlık</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.baslik }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Şehir</div>
+		<div class="col-sm-12 col-md-8"><span><a href="{{ item.sehir.get_istek_url }}">{{ item.sehir }}</a></span></div>
+	</div>
+    {% if item.meslek %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Meslek</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMeslekUrls|safe }}</span></div>
+	</div>
+    {% endif %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Zaman</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getZamanStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% if item.uye.cinsiyet %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Cinsiyet</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getCinsiyet|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yaş</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.dogum_tarihi|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Maaş</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getMaasStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Eğitim</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.egitim|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Tecrübe</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getTecrube|default:"Belirtilmemiş" }}</span></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Askerlik</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.uye.askerlik|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% if item.uye.dil_konusma %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Konuşma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getKonusulanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+    {% if item.uye.dil_yazma %}
+	<div class="row">
+		<div class="col-sm-12 col-md-4">Yabancı Dil (Yazma)</div>
+		<div class="col-sm-12 col-md-8"><span>{{ item.getYazilanDillerStr|default:"Belirtilmemiş" }}</span></div>
+	</div>
+    {% endif %}
+	</div>
+
+	<h3 class="mt-2">Ayrıntılar</h3><hr>
+	{{ item.detay|safe }}
+</section>
+</article>
+{% endblock %}

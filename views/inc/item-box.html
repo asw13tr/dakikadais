@@ -1,0 +1,18 @@
+<div class="ilan-kutusu">
+    <h3 class="ilan-baslik"><a href="{{ item.get_absolute_url }}">{{ item.baslik }}</a></h3>
+    <h4 class="yesil-bilgi">{{ item.getMeslekStr }}</h4>
+    <div class="summary">{{ item.detay|safe }}</div>
+    <span class="info"><em class="far fa-clock"></em> {{ item.getZamanStr }}</span>
+    <span class="info"><em class="fas fa-lira-sign"></em> {{ item.getMaasStr }}</span>
+    <span class="info"><em class="fas fa-business-time"></em> {{ item.getTecrube }} tecrübe</span>
+    {% if request.user.is_authenticated %}
+    {% if request.user.id == item.firma.uye.id or request.user.id == item.uye.id  %}
+    <div class="clearfix text-right"><hr>
+        <a href="{{ item.get_filter_items_url }}" class="btn btn-success btn-sm">Uygun İlanlar</a>
+        <a href="{{ item.get_edit_url }}" class="btn btn-warning btn-sm">Düzenle</a>
+        <a href="{{ item.get_delete_url }}" class="btn btn-danger btn-sm">Sil</a>
+    </div>
+    {% endif %}
+    {% endif %}
+	<div class="fixed-tr">{{ item.sehir }}</div>
+</div>

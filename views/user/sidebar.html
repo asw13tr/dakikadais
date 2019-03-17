@@ -1,0 +1,17 @@
+<div class="col-md-3 bg-light">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        {% if request.user.is_authenticated and request.user.uye_tipi == "kullanici" %}
+        <a class="nav-link" href="{% url 'isteklerim' %}">İş İsteklerim</a>
+        <a class="nav-link" href="{% url 'istek_olustur' %}">İş İsteği Oluştur</a>
+        {% endif %}
+
+        {% if request.user.is_authenticated and request.user.uye_tipi == "is_veren" %}
+        <a class="nav-link" href="{% url 'ilanlarim' %}">İş İlanlarım</a>
+        <a class="nav-link" href="{% url 'ilan_olustur' %}">İş İlanı Oluştur</a>
+        <a class="nav-link" href="{% url 'firma_duzenle' %}">Firma Bilgileri</a>
+        {% endif %}
+        <a class="nav-link" href="{% url 'hesap_duzenle' %}">Üye Bilgileri</a>
+        <a class="nav-link" href="{% url 'sifre_degistir' %}">Şifre Değiştir</a>
+        <a class="nav-link" href="{% url 'cikis_yap' %}">Çıkış Yap</a>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="ilan-kutusu">
+    <h3 class="ilan-baslik"><a href="">{{ item.sehir }} → {{ item.baslik }}</a></h3>
+    <h4 class="firma-baslik"><a href="">{{ item.getKategoriStr }}</a></h4>
+    <div>{{ item.detay|safe }}</div>
+    <span class="btn btn-outline-primary btn-sm">{{ item.getZamanStr }}</span>
+    <span class="btn btn-outline-secondary btn-sm">{{ item.getMeslekStr }}</span>
+    <span class="btn btn-outline-success btn-sm">{{ item.getMaasStr }}</span>
+    <span class="btn btn-outline-dark btn-sm">{{ item.getTecrube }}</span>
+</div>

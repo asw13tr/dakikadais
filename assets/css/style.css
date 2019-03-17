@@ -1,0 +1,193 @@
+/*
+	Arkaplan Grisi   =>  #f3f3f3;
+	Ana Renk Mavi    => rgb(0, 55, 123)
+	Ana Renk Turuncu => rgb(250, 150, 0)
+	Gölge: 0px 5px 10px 0px rgba(0,0,0,0.20);
+*/
+html, body{ background: #f3f3f3;   }
+.django-ckeditor-widget { width: 100%; }
+a#navbarBrand{ font-weight: 700; font-style: italic; }
+
+#headerNavbar{ background: rgb(0, 55, 123) !important;  }
+#headerNavbarIn a{ font-weight: 500; color: #D0D0D0;  }
+#headerNavbarIn a:hover{ color: #F0F0F0;  }
+	a#navbarGirisButon{background: rgba(0, 85, 123, 0.9); color: white; }
+		a#navbarGirisButon:hover{ background: rgba(0, 85, 123, 1); }
+
+	a#navbarCikisButon{background: rgba(161, 0, 0, 0.9); color: white; }
+		a#navbarCikisButon:hover{ background: rgba(161, 0, 0, 1); }
+
+	a#navbarIlanButon{background: rgba(0, 177, 57, 0.9); color: white; }
+		a#navbarIlanButon:hover{ background: rgba(0, 177, 57, 1); }
+
+	a#navbarIstekButon{background: rgba(25, 61, 234, 0.9); color: white; }
+		a#navbarIstekButon:hover{ background: rgba(25, 61, 234, 1); }
+
+
+
+
+/*
+	################################33
+	SİDEBAR
+*/
+.sidebox {
+	background: white;
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.20);
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+	.sidetitle{
+		padding: 10px;
+		font-size: 18px;
+		font-weight: 600;
+		background: rgb(250, 150, 0);
+		color: white;
+		letter-spacing: 0.5px;
+	}
+	.sidecontent{
+		margin: 10px;
+		overflow: hidden;
+	}
+		.sidemenu{
+			margin: 0px;
+			padding: 0px;
+			list-style-type: none;
+			max-height: 300px;
+			overflow: hidden;
+		}
+		.sidemenu.full{
+			max-height: 100%;
+		}
+
+		.sidemenu li{
+			border-top: 1px dashed rgba(200, 200, 200, 0.4);
+		}
+		.sidemenu.col2 li{
+			float: left;
+			width: 46%;
+			margin: 0px 2%;
+		}
+
+		.sidemenu.col1 li{
+			float: none !important;
+			width: 100% !important;
+			margin: 0px !important;
+		}
+		.sidemenu li a{
+			padding: 0px 5px;
+			line-height: 29px;
+			display: block;
+			color: rgba(0, 0, 0, 0.7);
+			font-size: 0.91rem;
+			font-weight: 500;
+			text-decoration: none;
+		}
+		.sidemenu li a:hover{
+			background: rgb(0, 55, 123);
+			color: rgba(255, 255, 255);
+		}
+
+
+	.moresidemenu{
+		cursor: pointer;
+		margin: 5px 0;
+		padding: 0px 5px;
+		line-height: 30px;
+		display: block;
+		color: rgba(0, 0, 0, 0.7);
+		font-size: 0.91rem;
+		font-weight: 500;
+		border: 1px dashed rgba(200, 200, 200, 0.4);
+	}
+	.moresidemenu:hover{ background: rgb(240, 240, 240)  }
+
+
+
+/*
+	# İlan Kutusu
+*/
+.ilanlar-bilgi h1{
+	padding: 0;
+	margin: 15px;
+	font-size: 1.50rem;
+	font-weight: 600;
+}
+.ilanlar-bilgi .ilan-baslik{ padding: 0 !important; margin: 0 !important; line-height: 1 !important;
+							 font-weight: 700; color:rgb(0, 55, 123); font-size: 1.61rem;}
+.ilanlar-bilgi .firma-baslik{ padding: 0 !important; margin: 10px 0 0 !important; line-height: 1 !important;
+							  font-weight: 500; color:rgb(0, 161, 35); font-size: 1.11rem; }
+
+.ilan-kutusu{
+	padding: 5px 15px 10px;
+	background: white;
+	border-top:7px solid rgba(123, 123, 123, 0.23);
+	border-right:3px solid rgba(123, 123, 123, 0.23);
+	border-radius: 5px;
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.20);
+	border-left: 5px solid rgb(0, 55, 123);
+	overflow: hidden;
+	margin-bottom: 10px;
+	position: relative;
+}
+	.ilan-kutusu .summary{ border-bottom: 1px solid #e5e5e5;}
+	.ilan-kutusu span.info{ font-size: 0.75rem; font-weight: 500; color: #616161; margin-right: 10px;}
+	.ilan-kutusu span.info em{ font-size: 0.85rem; font-size: 600; color:#313131;}
+	.ilan-baslik{ padding: 0 !important; margin: 0 45px 0 0 !important; line-height: 1 !important;}
+	.ilan-baslik a{ font-weight: 700; color:rgb(0, 55, 123); font-size: 1.23rem;}
+	.firma-baslik{ padding: 0 !important; margin: 0 !important; line-height: 1 !important;}
+	.firma-baslik a{ font-weight: 500; color:rgb(0, 161, 35); font-size: 1rem;}
+	.ilan-kutusu p{ font-size: 14px; line-height: 20px; margin-top: 5px; margin-bottom: 5px;}
+	.ilan-kutusu .btn-sm{ padding: .10rem .4rem; font-size: .789rem; }
+	.yesil-bilgi{ padding: 0 !important; margin: 5px 0 !important; line-height: 1 !important;   font-weight: 500; color:rgb(0, 161, 35); font-size: 0.8rem;}
+
+	.ilan-kutusu .fixed-tr{ padding: 5px 7px; position: absolute; right: 7px; top: 7px; background-color: rgb(250, 150, 0); color: white; font-size: 0.75rem; font-weight: 500;}
+
+.ilan-kutusu.single .items{
+	overflow: hidden !important;
+}
+.ilan-kutusu.single .items .row {
+	padding: 2px 0;
+	margin: 0 !important;
+}
+.ilan-kutusu.single .items .row div{
+	padding: 2px 3px;
+}
+.ilan-kutusu.single .items .row:nth-child(even){
+	background: rgba(240,240,240, 0.5);
+}
+.ilan-kutusu.single .items span{
+	color: rgb(0, 55, 123);
+	font-weight: 500;
+	font-size: 14px;
+}
+.ilan-kutusu.single .items .row div:first-child{
+	font-weight: 600 !important;
+	font-size: 14px;
+}
+.ilan-kutusu.single .items .row div:last-child a{
+	color: rgb(0, 55, 123);
+	text-decoration: underline;
+	font-size: 14px;
+}
+.ilan-kutusu.single .items .row div:last-child::before{
+	content: ":";
+	display: inline-block;
+	float: left;
+	padding-right: 5px;
+}
+.ilan-kutusu.single p{
+	font-size: 15px;
+	line-height: 1.5;
+	margin: 10px 0;
+}
+
+.minh{ min-height: calc(100vh - 145px); !important;}
+
+
+@media screen and (max-width: 767px ){
+	#headerNavbarIn a,
+	a#navbarIlanButon,
+	a#navbarCikisButon{
+		padding: 10px;
+	}
+}

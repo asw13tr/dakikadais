@@ -1,0 +1,81 @@
+{% extends 'master-full.html' %}
+{% block content %}
+{% if form %}
+
+
+
+<form action="{{ request.get_full_path }}" method="POST">
+{% csrf_token %}
+<div class="row bg-white pt-4 pb-4">
+<div class="col-12"><h5>İş İlanı Oluştur</h5><hr></div>
+
+<div class="col-sm-9">
+<div class="row">
+    <div class="col-12">{% include 'inc/alert.html' %}</div>
+    <div class="col-12">{% include 'finput-item.html' with item=form.baslik %}</div>
+    <div class="col-12 col-sm-6">{% include 'finput-item.html' with item=form.sehir %}</div>
+    <div class="col-12 col-sm-6">{% include 'finput-item.html' with item=form.tecrube %}</div>
+    <div class="col-12 checkboxes">{% include 'finput-item.html' with item=form.kategori search=True %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.zaman %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.maas %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.egitim %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.askerlik %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.dil_konusma %}</div>
+    <div class="col-12 col-sm-6 checkboxes">{% include 'finput-item.html' with item=form.dil_yazma %}</div>
+    <div class="col-12">{% include 'finput-item.html' with item=form.detay %}</div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="row">
+    <div class="col-12">{% include 'finput-item.html' with item=form.cinsiyet %}</div>
+    <div class="col-12">{% include 'finput-item.html' with item=form.yas_min %}</div>
+    <div class="col-12">{% include 'finput-item.html' with item=form.yas_max %}</div>
+    <div class="col-12 checkboxes">{% include 'finput-item.html' with item=form.meslek search=True %}</div>
+    <div class="col-12">
+        <button class="btn btn-warning btn-block" name="durum" value="0">Taslak Olarak Kaydet</button>
+        <button class="btn btn-primary btn-block" name="durum" value="1">Yayımla</button>
+    </div>
+</div>
+</div>
+
+
+
+
+</div>
+</form>
+
+
+
+
+{% endif %}
+{% endblock %}
+{% block head %}
+<style media="screen">
+    .form-group > label{ font-weight: 500; color: #000; display: block; }
+    .checkboxes .form-group ul{ margin: 0; padding: 0; list-style-type: none; display: block; overflow: hidden; max-height: 100px; overflow-y: auto;
+    border: 1px solid rgba(100, 100, 100, 0.18); min-height: 90px;}
+    .checkboxes .form-group ul li{ width: 50%; float: left; margin: 0; padding: 2px 5px; font-size: 14px;}
+    .checkboxes .form-group ul li label{ margin: 0; cursor: pointer; }
+
+    .checkboxes .form-group ul#id_meslek{ min-height: 450px; max-height: 450px; }
+    .checkboxes .form-group ul#id_meslek li{ width: 100%; float: none; }
+
+</style>
+{% endblock %}
+
+{% block footer %}
+
+<script type="text/javascript">
+    $('input[type=text], input[type=password], input[type=number], input[type=email],input[type=tel], input[type=url]').addClass('form-control').attr('autocomplete','off');
+    $('select').addClass('custom-select');
+    $('input[id^=search_]').on('input', function(){
+        var val = $(this).val();
+        val = val.substr(0,1).toUpperCase()+val.substr(1);
+        var alt = $(this).attr('alt');
+        $('ul#id_'+alt+' li').removeClass('d-none');
+        $('ul#id_'+alt+' li label:not(:contains('+val+'))').parent('li').addClass('d-none');
+    });
+</script>
+
+{{ form.media }}
+{% endblock %}

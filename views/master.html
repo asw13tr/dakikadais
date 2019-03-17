@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	{% include 'inc/head.html' %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+{% block header %}{% endblock %}
+{% include 'inc/navbar-header.html' %}
+
+<div class="container" id="wrapper">
+{% block top %}{% endblock %}
+<div class="row">
+	<section class="col-sm-8 p-2">{% block content %}{% endblock %}</section>
+	<aside class="col-sm-4 p-2">{% include 'inc/sidebar.html' %}</aside>
+</div>
+{% block bottom %}{% endblock %}
+</div>
+
+{% include 'inc/navbar-footer.html' %}
+{% block footer %}{% endblock %}
+</body>
+</html>

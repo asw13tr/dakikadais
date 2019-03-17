@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-3" id="headerNavbar">
+<div class="container">
+	<a class="navbar-brand" id="navbarBrand" href="{% url 'frontpage' %}"><i class="far fa-clock"></i> Dakikada i$</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavbarIn" aria-controls="headerNavbarIn" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="headerNavbarIn">
+	<ul class="navbar-nav w-100 justify-content-end">
+
+
+
+		{% if not request.user.is_authenticated %}
+		<a id="navbarGirisButon" class="nav-link" href="{% url 'giris_yap' %}"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+		{% endif %}
+
+		{% if not request.user.is_authenticated%}
+		<a id="navbarIlanButon" class="nav-link" href="{% url 'ilan_olustur' %}"><i class="fas fa-bullhorn"></i> İlan Yayınla</a>
+		<a id="navbarIstekButon" class="nav-link" href="{% url 'istek_olustur' %}"><i class="fas fa-bullhorn"></i> İş iste</a>
+		{% endif %}
+
+		{% if request.user.is_authenticated %}
+		{% if request.user.uye_tipi == "is_veren" %}
+		<a id="navbarIsciButon" class="nav-link" href="{% url 'ilan_olustur' %}"><i class="fas fa-user-md"></i> Çalışan Ara</a>
+		<a id="navbarIlanButon" class="nav-link" href="{% url 'ilanlarim' %}"><i class="fas fa-user"></i> {{ request.user.username }}</a>
+		{% else %}
+		<a id="navbarIsButon" class="nav-link" href="{% url 'istek_olustur' %}"><i class="fas fa-search-dollar"></i> İş Ara</a>
+		<a id="navbarIlanButon" class="nav-link" href="{% url 'isteklerim' %}"><i class="fas fa-user"></i> {{ request.user.username }}</a>
+		{% endif %}
+		{% endif %}
+
+		{% if request.user.is_authenticated %}
+		<a id="navbarCikisButon" class="nav-link" href="{% url 'cikis_yap' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+		{% endif %}
+	</ul>
+	</div>
+</div>
+</nav>

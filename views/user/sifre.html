@@ -1,0 +1,57 @@
+{% extends 'master-full.html' %}
+{% block content %}
+{% if form %}
+<form action="{{ request.get_full_path }}" method="POST" enctype="multipart/form-data">
+<div class="row bg-white p-4">
+    <div class="clearfix col-12"><h4>Kullanıcı Şifrenizi Değiştirin</h4><hr></div>
+    {% include 'inc/alert.html' %}
+    <div class="col-md-9">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    {{ form.as_p }}
+                    <button class="btn btn-success font-weight-bold">Onayla</button>
+                </div>
+
+            </div>
+    </div><!-- .col-md-9 -->
+
+    {% include 'user/sidebar.html' %}
+
+
+
+
+</div>
+</form>
+{% endif %}
+{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block footer %}
+<script src="{% static 'datepicker/js/bootstrap-datepicker.tr.min.js' %}"></script>
+<script src="{% static 'datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript">
+    $('input').attr('autocomplete', 'off');
+    $('input[type=text],input[type=password],input[type=email],input[type=url],input[type=file],textarea, select').addClass('form-control');
+    $('.django-ckeditor-widget').attr('style', 'width:100%;');
+    $('.django-ckeditor-widget').parent().find('label').remove();
+    $('input[type=file]').on("change", function(e){
+        var url = window.URL.createObjectURL( e.target.files[0] )
+        if( url ){
+            $(this).parent('.form-group').find('img').remove();
+            $(this).before('<img src="'+url+'" class="img-fluid" />');
+        }
+    });
+
+    $('#id_dogum_tarihi').datepicker({
+        format: "dd/mm/yyyy",
+        language: "tr",
+        clearBtn: true,
+        endDate: "-15y"
+    });
+
+</script>
+{{ form.media }}
+{% endblock %}
